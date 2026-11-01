@@ -36,33 +36,4 @@ See the documentation for the full file tree.
 License
 MIT
 
----
 
-### 15.7 `logs/` directory
-
-Create an empty `logs/` folder. The application will populate `app.log` automatically.
-
----
-
-### 15.8 `documentation/` folder
-
-If you haven't already, you can place your existing report and presentation files here. No code changes needed.
-
----
-
-## ✅ Complete File Tree Now Matches
-
-Every file from the original specification now exists—either as fully functional code or as a placeholder stub ready for future development. The application is fully runnable.
-
----
-
-## Next Steps
-
-You can now **test** the entire system:
-
-1. Activate virtual environment.
-2. `python app.py`
-3. Open `http://127.0.0.1:5000`
-4. Verify all core tabs work (Quantum Core, Encrypt, Decrypt, Analysis updates).
-
-When you're ready, type **"TESTED"** and I'll help you package or polish any final details.
