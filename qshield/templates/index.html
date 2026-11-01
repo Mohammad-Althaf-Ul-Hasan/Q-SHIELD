@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q‑SHIELD — Quantum Secure Hybrid Integrated Encryption for Layered Data Distribution</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Three.js for Bloch Sphere -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <canvas id="quantumCanvas"></canvas>
+    <div id="particleContainer"></div>
+
+    <!-- Custom cursor element -->
+    <div id="quantumCursor"></div>
+
+    <!-- Ambient audio (muted by default) -->
+    <audio id="ambientAudio" loop muted preload="auto">
+        <!-- A tiny silent base64 audio; can be replaced with an actual file later -->
+        <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=" type="audio/wav">
+    </audio>
+
+    <nav class="section-nav" id="sectionNav">
+        <a href="#section-hero" class="nav-dot active" data-section="hero" title="Home"></a>
+        <a href="#section-quantum" class="nav-dot" data-section="quantum" title="Quantum Core"></a>
+        <a href="#section-encrypt" class="nav-dot" data-section="encrypt" title="Encrypt/Decrypt"></a>
+        <a href="#section-analysis" class="nav-dot" data-section="analysis" title="Analysis"></a>
+        <a href="#section-network" class="nav-dot" data-section="network" title="Network"></a>
+        <a href="#section-satellite" class="nav-dot" data-section="satellite" title="Satellite"></a>
+        <a href="#section-ml" class="nav-dot" data-section="ml" title="ML"></a>
+        <a href="#section-forecast" class="nav-dot" data-section="forecast" title="Forecast"></a>
+        <a href="#section-audit" class="nav-dot" data-section="audit" title="Audit"></a>
+        <a href="#section-benchmark" class="nav-dot" data-section="benchmark" title="Benchmark"></a>
+        <a href="#section-experiment" class="nav-dot" data-section="experiment" title="Lab"></a>
+    </nav>
+
+    <div class="status-bar">
+        <div class="status-left">
+            <span class="status-dot dot-idle" id="statusDot"></span>
+            <span id="statusText">System Idle</span>
+        </div>
+        <div class="status-right">
+            <span class="status-label">QBER:</span>
+            <span id="qberValue" class="qber-value">--</span>
+        </div>
+    </div>
+
+    <!-- ========== HERO (100vh) ========== -->
+    <section class="full-section" id="section-hero" data-scroll-animate>
+        <div class="hero-content">
+            <div class="hero-logo">🛡️</div>
+            <h1 class="hero-title" id="heroTitle">Q‑SHIELD</h1>
+            <p class="hero-subtitle">Quantum Secure Hybrid Integrated Encryption for Layered Data Distribution</p>
+            <button class="btn-neon btn-neon-hero" id="gotoQuantumBtn">⚛️ Enter the Lab</button>
+        </div>
+    </section>
+
+    <!-- ========== QUANTUM CORE (100vh) ========== -->
+    <section class="full-section" id="section-quantum" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7">
+                    <div class="glass-card"><div class="glass-card-body">
+                        <h5 class="glass-card-title">🔬 Quantum Channel Visualization</h5>
+                        <div style="display:flex; gap:10px; margin-bottom:15px;">
+                            <button id="e91Btn" class="btn-neon btn-neon-sky" style="flex:1;">🔮 E91 Protocol</button>
+                            <button id="mdiBtn" class="btn-neon btn-neon-purple" style="flex:1;">🛡️ MDI‑QKD</button>
+                        </div>
+                        <div id="qkdNetworkViz" style="width:100%; height:150px;"></div>
+                        <!-- Bloch Sphere container -->
+                        <div id="blochContainer" style="width:100%; height:200px; margin-top:10px;"></div>
+                        <div class="protocol-flow" id="protocolFlow">
+                            <div class="flow-step" data-step="prepare"><span class="flow-dot"></span><span>Prepare</span></div>
+                            <div class="flow-step" data-step="transmit"><span class="flow-dot"></span><span>Transmit</span></div>
+                            <div class="flow-step" data-step="measure"><span class="flow-dot"></span><span>Measure</span></div>
+                            <div class="flow-step" data-step="sift"><span class="flow-dot"></span><span>Sift</span></div>
+                            <div class="flow-step" data-step="qber"><span class="flow-dot"></span><span>QBER</span></div>
+                            <div class="flow-step" data-step="distill"><span class="flow-dot"></span><span>Distill</span></div>
+                            <div class="flow-step" data-step="final"><span class="flow-dot"></span><span>Final Key</span></div>
+                        </div>
+                    </div></div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="glass-card"><div class="glass-card-body">
+                        <h5 class="glass-card-title">⚛️ Generate Hybrid Keys</h5>
+                        <button id="generateBtn" class="btn-neon btn-neon-purple w-100"><span class="btn-content">Generate Keys</span></button>
+                        <div class="terminal-box mt-3">
+                            <div class="terminal-header"><span class="terminal-dot dot-red"></span><span class="terminal-dot dot-yellow"></span><span class="terminal-dot dot-green"></span><span class="terminal-title">qkd_output.log</span></div>
+                            <div class="terminal-body" id="keyTerminalBody"><span class="terminal-prompt">$</span> <span class="terminal-dim">Awaiting key generation...</span></div>
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ENCRYPT/DECRYPT (100vh) ========== -->
+    <section class="full-section" id="section-encrypt" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">🔒 Encrypt & Send</h5>
+                        <textarea id="messageInput" class="glass-textarea flex-grow-1" rows="6" placeholder="Type your secret message here...&#10;Supports multiple lines." style="min-height:180px;"></textarea>
+                        <button id="encryptBtn" class="btn-neon btn-neon-emerald w-100 mt-3"><span class="btn-content">Encrypt & Send</span></button>
+                        <div class="terminal-box mt-3"><div class="terminal-header"><span class="terminal-dot dot-red"></span><span class="terminal-dot dot-yellow"></span><span class="terminal-dot dot-green"></span><span class="terminal-title">ciphertext.bin</span></div><div class="terminal-body" id="encryptTerminalBody">No encrypted data yet...</div></div>
+                    </div></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">🔓 Receive & Decrypt</h5>
+                        <div class="terminal-box terminal-box-green mt-2 flex-grow-1"><div class="terminal-header"><span class="terminal-dot dot-red"></span><span class="terminal-dot dot-yellow"></span><span class="terminal-dot dot-green"></span><span class="terminal-title">plaintext.txt</span></div><div class="terminal-body" id="decryptTerminalBody">No decrypted message yet...</div></div>
+                        <button id="decryptBtn" class="btn-neon btn-neon-sky w-100 mt-3"><span class="btn-content">Decrypt Message</span></button>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ANALYSIS (80vh) ========== -->
+    <section class="full-section compact-section" id="section-analysis" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-3" style="height:100%;">
+                <div class="col-md-6 d-flex flex-column gap-3">
+                    <div class="glass-card flex-grow-1"><div class="glass-card-body text-center">
+                        <h5 class="glass-card-title">📈 QBER Gauge</h5>
+                        <svg class="qber-svg-gauge" viewBox="0 0 220 130"><path class="qber-gauge-bg" d="M30 110 A85 85 0 0 1 190 110"/><path id="qberGaugeFill" class="qber-gauge-fill safe" d="M30 110 A85 85 0 0 1 190 110"/></svg>
+                        <div class="qber-gauge-value" id="qberGaugeValue">--%</div>
+                    </div></div>
+                    <div class="glass-card flex-grow-1"><div class="glass-card-body">
+                        <h5 class="glass-card-title">📊 Key Metrics</h5>
+                        <div class="d-flex align-items-end justify-content-center gap-4" style="height:100px;">
+                            <div class="text-center"><div class="sparkline-bar" id="barRaw" style="height:30%;min-width:28px;"></div><small class="text-secondary">Raw</small></div>
+                            <div class="text-center"><div class="sparkline-bar" id="barSifted" style="height:30%;min-width:28px;"></div><small class="text-secondary">Sifted</small></div>
+                            <div class="text-center"><div class="sparkline-bar" id="barFinal" style="height:30%;min-width:28px;background:linear-gradient(180deg,#10b981,#34d399);"></div><small class="text-secondary">Final</small></div>
+                        </div>
+                        <div id="keyMetricsText" class="mt-2 text-center small text-secondary">Run a protocol</div>
+                    </div></div>
+                </div>
+                <div class="col-md-6 d-flex flex-column gap-3">
+                    <div class="glass-card flex-grow-1"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">📉 QBER History</h5>
+                        <div class="flex-grow-1"><canvas id="qberHistoryChart"></canvas></div>
+                    </div></div>
+                    <div class="glass-card flex-grow-1"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">📊 Bit Distribution</h5>
+                        <div class="flex-grow-1"><canvas id="bitDistChart"></canvas></div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== NETWORK (70vh) ========== -->
+    <section class="full-section medium-section" id="section-network" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-4" style="height:100%;">
+                <div class="col-lg-5">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">🌐 Multi‑Node QKD Network</h5>
+                        <p class="glass-card-text">Quantum network topology with trusted relays and live key rates.</p>
+                        <button id="simulateNetworkBtn" class="btn-neon btn-neon-purple w-100"><span class="btn-content">Run Simulation</span></button>
+                        <div id="networkResult" class="terminal-box mt-3 flex-grow-1" style="max-height:200px;overflow-y:auto;word-break:break-all;"></div>
+                    </div></div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="glass-card h-100"><div class="glass-card-body" style="overflow:hidden;">
+                        <div id="networkGraphViz" style="width:100%; height:100%; min-height:350px;"></div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SATELLITE (70vh) ========== -->
+    <section class="full-section medium-section" id="section-satellite" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-4" style="height:100%;">
+                <div class="col-lg-5">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">🛰️ Satellite QKD Link Budget</h5>
+                        <label class="text-secondary small">Altitude (km)</label>
+                        <input type="number" id="satAltitude" class="glass-textarea mb-2" value="500">
+                        <label class="text-secondary small">Zenith Angle (°)</label>
+                        <input type="number" id="satZenith" class="glass-textarea mb-2" value="0">
+                        <label class="text-secondary small">Atmospheric Loss (dB)</label>
+                        <input type="number" id="satAtm" class="glass-textarea mb-2" value="3">
+                        <button id="calculateLinkBudgetBtn" class="btn-neon btn-neon-sky w-100"><span class="btn-content">Calculate Link Budget</span></button>
+                        <div id="satResult" class="terminal-box mt-2 flex-grow-1"></div>
+                    </div></div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="glass-card h-100"><div class="glass-card-body" style="overflow:hidden;">
+                        <div id="satOrbitViz" style="width:100%; height:100%; min-height:350px;"></div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ML (70vh) ========== -->
+    <section class="full-section medium-section" id="section-ml" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-4" style="height:100%;">
+                <div class="col-lg-4">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">🤖 Anomaly Detection</h5>
+                        <button id="trainMLBtn" class="btn-neon btn-neon-purple w-100"><span class="btn-content">Train Models</span></button>
+                        <div id="mlStatus" class="mt-2 small"></div>
+                        <button id="predictAttackBtn" class="btn-neon btn-neon-emerald w-100 mt-2"><span class="btn-content">Predict Attack</span></button>
+                        <div id="anomalyResult" class="terminal-box mt-2 flex-grow-1"></div>
+                    </div></div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">Attack Probability</h5>
+                        <div class="flex-grow-1"><canvas id="anomalyGaugeChart"></canvas></div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FORECAST (70vh) ========== -->
+    <section class="full-section medium-section" id="section-forecast" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-4" style="height:100%;">
+                <div class="col-lg-4">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">📈 Key Rate Forecasting</h5>
+                        <button id="forecastBtn" class="btn-neon btn-neon-sky w-100"><span class="btn-content">Get Forecast</span></button>
+                        <div id="forecastResult" class="terminal-box mt-2 flex-grow-1"></div>
+                    </div></div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">SKR Forecast Chart</h5>
+                        <div class="flex-grow-1"><canvas id="forecastChart"></canvas></div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== AUDIT (70vh) ========== -->
+    <section class="full-section medium-section" id="section-audit" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-4" style="height:100%;">
+                <div class="col-lg-4">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">⛓️ Immutable Audit Trail</h5>
+                        <button id="refreshAuditBtn" class="btn-neon btn-neon-purple w-100"><span class="btn-content">View Audit Log</span></button>
+                        <div id="auditResult" class="terminal-box mt-2 flex-grow-1" style="max-height:250px;overflow-y:auto;"></div>
+                    </div></div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="glass-card h-100"><div class="glass-card-body" style="overflow:hidden; height:100%;">
+                        <div id="blockchainViz" style="width:100%; height:100%; min-height:280px;"></div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== BENCHMARK (70vh) ========== -->
+    <section class="full-section medium-section" id="section-benchmark" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-4" style="height:100%;">
+                <div class="col-lg-4">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">⚡ Cryptographic Benchmark</h5>
+                        <button id="runBenchmarkBtn" class="btn-neon btn-neon-emerald w-100"><span class="btn-content">Run Benchmark</span></button>
+                        <div id="benchmarkResult" class="terminal-box mt-2 flex-grow-1"></div>
+                    </div></div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">Performance Comparison</h5>
+                        <div class="flex-grow-1"><canvas id="benchmarkChart"></canvas></div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== EXPERIMENT LAB (70vh) ========== -->
+    <section class="full-section medium-section" id="section-experiment" data-scroll-animate>
+        <div class="section-inner">
+            <div class="row g-4" style="height:100%;">
+                <div class="col-lg-5">
+                    <div class="glass-card h-100"><div class="glass-card-body d-flex flex-column">
+                        <h5 class="glass-card-title">🧪 Experiment Lab</h5>
+                        <label class="text-secondary small">Number of Qubits</label>
+                        <input type="number" id="expQubits" class="glass-textarea mb-2" value="256">
+                        <label class="text-secondary small">Attack Type</label>
+                        <select id="expAttack" class="glass-textarea mb-2"><option value="intercept_resend">Intercept-Resend</option><option value="photon_number_splitting">PNS</option><option value="faked_state">Faked State</option><option value="collective">Collective</option></select>
+                        <label class="text-secondary small">Decoy‑State</label>
+                        <select id="expDecoy" class="glass-textarea mb-2"><option value="off">Off</option><option value="on">On</option></select>
+                        <label class="small text-secondary d-block mb-2"><input type="checkbox" id="expEveToggle"> Enable Eavesdropper</label>
+                        <button id="runExperimentBtn" class="btn-neon btn-neon-purple w-100"><span class="btn-content">Run Experiment</span></button>
+                        <div id="experimentResult" class="terminal-box mt-2 flex-grow-1"></div>
+                    </div></div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="glass-card h-100"><div class="glass-card-body text-center d-flex flex-column justify-content-center">
+                        <h5 class="glass-card-title">Live QBER Monitor</h5>
+                        <svg class="qber-svg-gauge" viewBox="0 0 220 130" style="display:block;margin:0 auto;"><path class="qber-gauge-bg" d="M30 110 A85 85 0 0 1 190 110"/><path id="expGaugeFill" class="qber-gauge-fill safe" d="M30 110 A85 85 0 0 1 190 110"/></svg>
+                        <div class="qber-gauge-value" id="expGaugeValue">--%</div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

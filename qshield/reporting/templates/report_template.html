@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Q-SHIELD Report Template</title></head>
+<body style="font-family: Arial, sans-serif; color: #1e293b;">
+    <h1 style="color: #7c3aed;">Q-SHIELD Protocol Run Report</h1>
+    <p>Generated on: {{ generated_at }}</p>
+    <table border="1" cellpadding="8" style="border-collapse: collapse; width: 100%;">
+        <tr><th>Parameter</th><th>Value</th></tr>
+        <tr><td>QBER</td><td>{{ qber_percent }}%</td></tr>
+        <tr><td>Eavesdropper Detected</td><td>{{ compromised }}</td></tr>
+        <tr><td>Sifted Bits</td><td>{{ sifted_bits }}</td></tr>
+        <tr><td>Errors Corrected</td><td>{{ errors_corrected }}</td></tr>
+        <tr><td>Final Key Length</td><td>{{ final_key_length }} bytes</td></tr>
+    </table>
+</body>
+</html>

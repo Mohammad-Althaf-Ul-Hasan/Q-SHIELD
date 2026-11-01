@@ -1,0 +1,32 @@
+# Web Framework & Real-Time
+Flask==3.0.0
+flask-socketio==5.3.6
+
+# Database
+mysql-connector-python==8.1.0
+sqlalchemy==2.0.25
+
+# Post-Quantum Cryptography
+kyber-py==1.2.0
+
+# Classical Cryptography
+cryptography==41.0.7
+
+# Numerical & Scientific
+numpy==1.26.4
+scipy==1.12.0
+
+# HTTP Requests (for QRNG API)
+requests==2.31.0
+
+# PDF Generation
+reportlab==4.0.9
+
+# Machine Learning
+scikit-learn==1.4.0
+
+# Environment Variables
+python-dotenv==1.0.0
+
+# Testing
+pytest==7.4.3

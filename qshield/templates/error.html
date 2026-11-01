@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Q-SHIELD — {{ code }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #030712;
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 { font-size: 6rem; background: linear-gradient(135deg, #7c3aed, #06b6d4); 
+            -webkit-background-clip; text; -webkit-text-fill-color: transparent; }
+        p { font-size: 1.2rem; color: #94a3b8; margin: 20px 0; }
+        a { color: #8b5cf6; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>{{ code }}</h1>
+        <p>{{ message }}</p>
+        <a href="/">Return to Q‑SHIELD</a>
+    </div>
+</body>
+</html>

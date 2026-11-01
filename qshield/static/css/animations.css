@@ -1,0 +1,99 @@
+/* ============================================================
+   Q‑SHIELD — Animation Keyframes (Awwwards Edition)
+   ============================================================ */
+
+/* Existing utility animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseDot {
+    0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+    50%      { box-shadow: 0 0 16px 6px transparent; opacity: 0.6; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+@keyframes bounceDown {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(8px); }
+}
+@keyframes particleBurst {
+    0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--px), var(--py)) scale(0); opacity: 0; }
+}
+
+/* ---------- Awwwards‑level additions ---------- */
+
+/* Holographic border rotation */
+@keyframes holoRotate {
+    from { --holo-angle: 0deg; }
+    to   { --holo-angle: 360deg; }
+}
+
+/* Tab view‑transition wipes */
+@keyframes wipeOut {
+    0%   { clip-path: circle(150% at 50% 50%); opacity: 1; }
+    100% { clip-path: circle(0% at 50% 50%); opacity: 0; }
+}
+@keyframes wipeIn {
+    0%   { clip-path: circle(0% at 50% 50%); opacity: 0; }
+    100% { clip-path: circle(150% at 50% 50%); opacity: 1; }
+}
+
+/* Semi‑circular gauge fill */
+@keyframes gaugeFill {
+    from { stroke-dashoffset: 267; }
+    to   { stroke-dashoffset: var(--gauge-target); }
+}
+
+/* CRT scan line */
+@keyframes scanLine {
+    0%   { top: 0; }
+    100% { top: 100%; }
+}
+
+/* Typewriter entrance */
+@keyframes typewriter {
+    from { width: 0; }
+    to   { width: 100%; }
+}
+
+/* Glow pulse for security badge */
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(16,185,129,0.2); }
+    50%      { box-shadow: 0 0 22px rgba(16,185,129,0.5); }
+}
+
+/* Shimmer for holographic borders on hover */
+@keyframes badgeShimmer {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Card reveal on page load */
+@keyframes cardReveal {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Particle field hover reaction */
+@keyframes particleHover {
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.8); }
+}
+
+/* Data bar grow */
+@keyframes dataBarGrow {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+}
+
+/* Stagger fade for list items */
+@keyframes staggerFade {
+    from { opacity: 0; transform: translateX(-8px); }
+    to   { opacity: 1; transform: translateX(0); }
+}

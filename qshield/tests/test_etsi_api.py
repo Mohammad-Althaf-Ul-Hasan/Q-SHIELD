@@ -1,0 +1,1 @@
+# Placeholder for ETSI API tests

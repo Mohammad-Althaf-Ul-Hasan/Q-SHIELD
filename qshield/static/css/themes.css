@@ -1,0 +1,47 @@
+/* ============================================================
+   Q‑SHIELD — Theme Variables (Awwwards Edition)
+   ============================================================ */
+:root {
+    /* Canvas */
+    --bg-deep: #020617;
+    --bg-card: rgba(12, 12, 28, 0.50);
+    --bg-card-hover: rgba(18, 18, 38, 0.65);
+    --bg-terminal: #0a0c14;
+    --border-glass: rgba(255, 255, 255, 0.06);
+
+    /* Text */
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-dim: #64748b;
+
+    /* Accent colors */
+    --accent-purple: #8b5cf6;
+    --accent-purple-hover: #7c3aed;
+    --accent-emerald: #10b981;
+    --accent-emerald-hover: #059669;
+    --accent-sky: #0ea5e9;
+    --accent-sky-hover: #0284c7;
+    --accent-cyan: #06b6d4;
+    --accent-red: #ef4444;
+    --accent-yellow: #eab308;
+
+    /* Holographic */
+    --holo-angle: 0deg;
+
+    /* Typography */
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
+
+    /* Radii & transitions */
+    --radius-card: 24px;
+    --radius-btn: 14px;
+    --radius-terminal: 12px;
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-page: 0.35s ease-in-out;
+
+    /* Glow presets */
+    --glow-purple: 0 0 25px rgba(139, 92, 246, 0.4);
+    --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.35);
+    --glow-emerald: 0 0 20px rgba(16, 185, 129, 0.35);
+}

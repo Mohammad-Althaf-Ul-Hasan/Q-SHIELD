@@ -1,0 +1,19 @@
+<div class="tab-panel" id="panel-satellite">
+    <div class="row g-4">
+        <div class="col-lg-8 mx-auto">
+            <div class="glass-card">
+                <div class="glass-card-body">
+                    <div class="card-icon">🛰️</div>
+                    <h5 class="glass-card-title">Satellite QKD Link Budget</h5>
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-4"><label class="text-secondary small">Altitude (km)</label><input type="number" id="satAltitude" class="form-control" value="500"></div>
+                        <div class="col-md-4"><label class="text-secondary small">Zenith Angle (°)</label><input type="number" id="satZenith" class="form-control" value="0"></div>
+                        <div class="col-md-4"><label class="text-secondary small">Atmospheric Loss (dB)</label><input type="number" id="satAtm" class="form-control" value="3"></div>
+                    </div>
+                    <button id="calculateLinkBudgetBtn" class="btn-neon btn-neon-sky w-100 mt-3"><span class="btn-content">Calculate Link Budget</span></button>
+                    <div id="satResult" class="terminal-box mt-3"><div class="terminal-body">Enter parameters and calculate...</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
